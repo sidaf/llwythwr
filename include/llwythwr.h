@@ -18,7 +18,6 @@ extern "C" {
 #endif
 
 #include <stddef.h>
-#include <llwythwr/export.h>
 #if defined(__APPLE__)
 #include "llwythwr/darwin.h"
 #elif defined(_WIN32)

@@ -2,9 +2,13 @@
 #define LLWYTHWR_INCLUDE_LLWYTHWR_DARWIN_H_
 
 #include <stddef.h>
-#include <llwythwr/export.h>
 #include <mach-o/dyld.h>
 #include <sys/mman.h>
+#ifdef LLWYTHWR_INTERFACE_ONLY
+#define LLWYTHWR_EXPORT
+#else
+#include <llwythwr/export.h>
+#endif
 
 typedef NSObjectFileImageReturnCode (*func_NSCreateObjectFileImageFromMemory)(const void*, size_t, NSObjectFileImage*);
 typedef NSModule (*func_NSLinkModule)(NSObjectFileImage, const char*, uint32_t);

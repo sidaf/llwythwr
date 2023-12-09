@@ -344,7 +344,6 @@ void llwythwr_unload_library(llwythwr_windows_library *library) {
         library->api->LocalFree(library->dependences[i]);
       }
     }
-    library->api->LocalFree(library->dependences);
   }
 
   llwythwr_unlink_library(library);
@@ -498,7 +497,7 @@ llwythwr_windows_library *llwythwr_map_library_from_disk_to_section(llwythwr_win
   PIMAGE_DOS_HEADER dos = (PIMAGE_DOS_HEADER) view_base;
   PIMAGE_NT_HEADERS nt = RVA2VA(PIMAGE_NT_HEADERS, view_base, dos->e_lfanew);
 
-  llwythwr_windows_library *library = (llwythwr_windows_library *) malloc(sizeof(llwythwr_windows_library));
+  llwythwr_windows_library *library = (llwythwr_windows_library *) api->LocalAlloc(LPTR, sizeof(llwythwr_windows_library));
   if (library == NULL) {
     DPRINT("Could not allocate memory.\n");
     SetLastError(ERROR_OUTOFMEMORY);
@@ -634,7 +633,7 @@ llwythwr_windows_library* llwythwr_alloc_library(llwythwr_windows_api *api,
 
   DPRINT("Mapped to address: %p\n", image_base);
 
-  llwythwr_windows_library *library = (llwythwr_windows_library *) malloc(sizeof(llwythwr_windows_library));
+  llwythwr_windows_library *library = (llwythwr_windows_library *) api->LocalAlloc(LPTR, sizeof(llwythwr_windows_library));
   if (library == NULL) {
     DPRINT("Could not allocate memory.\n");
     SetLastError(ERROR_OUTOFMEMORY);
@@ -751,7 +750,7 @@ llwythwr_windows_library* llwythwr_map_library(llwythwr_windows_api *api,
   DPRINT("View size: %lld\n", view_size);
   DPRINT("Mapped to address: %p\n", image_base);
 
-  llwythwr_windows_library *library = (llwythwr_windows_library *) malloc(sizeof(llwythwr_windows_library));
+  llwythwr_windows_library *library = (llwythwr_windows_library *) api->LocalAlloc(LPTR, sizeof(llwythwr_windows_library));
   if (library == NULL) {
     DPRINT("Could not allocate memory.\n");
     SetLastError(ERROR_OUTOFMEMORY);
@@ -808,7 +807,7 @@ llwythwr_windows_library* llwythwr_load_hollow_library(llwythwr_windows_api *api
     return FALSE;
   }
 
-  llwythwr_windows_library* decoy = (llwythwr_windows_library *) malloc(sizeof(llwythwr_windows_library));
+  llwythwr_windows_library* decoy = (llwythwr_windows_library *) api->LocalAlloc(LPTR, sizeof(llwythwr_windows_library));
   if (decoy == NULL) {
     DPRINT("Could not allocate memory.\n");
     SetLastError(ERROR_OUTOFMEMORY);
