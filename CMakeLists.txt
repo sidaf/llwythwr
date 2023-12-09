@@ -49,7 +49,7 @@ if(BUILD_INTERFACE_ONLY)
     endif ()
     target_include_directories(llwythwr INTERFACE
             "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>")
-    add_definitions(-DLLWYTHWR_INTERFACE_ONLY)
+    target_compile_definitions(llwythwr INTERFACE LLWYTHWR_INTERFACE_ONLY)
 else()
     if (WIN32)
         target_sources(llwythwr PRIVATE src/windows.c)
