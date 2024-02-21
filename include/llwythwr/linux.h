@@ -3,7 +3,11 @@
 
 #include <stddef.h>
 #include <sys/types.h>
+#ifdef LLWYTHWR_INTERFACE_ONLY
+#define LLWYTHWR_EXPORT
+#else
 #include <llwythwr/export.h>
+#endif
 
 typedef void* (*func_dlopen)(const char*, int);
 typedef int (*func_dlclose)(void*);

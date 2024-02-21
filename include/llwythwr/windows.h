@@ -3,7 +3,11 @@
 
 #include <windows.h>
 #include <winternl.h>
+#ifdef LLWYTHWR_INTERFACE_ONLY
+#define LLWYTHWR_EXPORT
+#else
 #include <llwythwr/export.h>
+#endif
 
 /*
  * Typedef

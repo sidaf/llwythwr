@@ -287,7 +287,7 @@ TEST_CASE("load_hollow_library")
 
   llwythwr_unload_library(library);
 
-  FreeLibrary(decoy);
+  //FreeLibrary(decoy);
 }
 
 typedef struct _LDR_DATA_TABLE_ENTRY1 {
